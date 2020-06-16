@@ -135,6 +135,7 @@ export default class Show extends Component {
                                                                 <tr style={{ height: 70}}>
                                                                     <th style={{ width:150 }}><center>No</center></th>
                                                                     <th style={{ width: 350 }}>Tanggal</th>
+                                                                    <th style={{ width: 350 }}>Jam</th>
                                                                     <th>Nama Dinas / Instansi</th>
                                                                     <th>Nama Kegiatan</th>
                                                                     <th>Status</th>
@@ -145,6 +146,7 @@ export default class Show extends Component {
                                                                     <tr key={key} style={{height:70, borderBottom:'1px solid #dcdde1'}}>
                                                                         <td style={{ width:150 }}><center>{key + 1}</center></td>
                                                                         <td style={{ width: 350 }}>{moment(data.tanggal).format('dddd, DD MMMM YYYY')}</td>
+                                                                        <td>{data.jam_mulai} sampai {data.jam_selesai}</td>
                                                                         <td style={{ width: 500 }}>{data.instansi}</td>
                                                                         <td style={{ width: 800 }}>{data.nama_kegiatan}</td>
                                                                         <td style={{ width: 300,}}><center>{(() => {

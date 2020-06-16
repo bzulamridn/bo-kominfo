@@ -43,19 +43,24 @@ class AuthController extends Controller
         $username = $req->username;
         $password = $req->password;
         $akses = $req->akses;
-        $data = InstansiModel::where('username', $username)->get()->last();
+        $data = InstansiModel::where('username', $username)->orWhere('email', $username)->get()->last();
 
-        if (Hash::check($password, $data->password)) {
-            if ($data->aktif != 1) {
-                return response()->json(['status' => '0'], 200);
+        if($data != null){
+            if (Hash::check($password, $data->password)) {
+                if ($data->aktif != 1) {
+                    return response()->json(['status' => '0'], 200);
+                } else {
+                    Session::put('akses', $akses);
+                    //session()->put('akses', $akses);
+                    return response()->json(['status' => '1', 'data' => $data], 200);
+                }
             } else {
-                Session::put('akses', $akses);
-                //session()->put('akses', $akses);
-                return response()->json(['status' => '1', 'data' => $data], 200);
+                return response()->json(['status' => '0'], 200);
             }
-        } else {
+        }else{
             return response()->json(['status' => '0'], 200);
         }
+        
     }
 
     public function loginop(Request $req)

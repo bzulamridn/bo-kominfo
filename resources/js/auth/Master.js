@@ -36,7 +36,6 @@ export default class Master extends Component {
             this.setState({
                 akses
             })
-            console.log(akses)
             this.getData()
             this.akses()
         }
@@ -50,7 +49,6 @@ export default class Master extends Component {
                         isLoading: false,
                         user: res.data.data
                     })
-                    console.log(res.data.data)
                 })
         } else {
             axios.get('/api/user/op/' + localStorage.getItem('id'))
@@ -59,7 +57,6 @@ export default class Master extends Component {
                         isLoading: false,
                         user: res.data.data
                     })
-                    console.log(res.data.data)
                 })
         }
 

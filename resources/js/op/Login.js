@@ -45,11 +45,7 @@ export default class Login extends Component {
             this.setState({
                 isLoading: true
             })
-            // axios.post('/api/loginop/', {
-            //     email : this.state.email,
-            //     password : this.state.password,
-            //     akses : 'operator'
-            // })
+         
             axios.get(`/api/loginop/${this.state.email}/${this.state.password}/${this.state.akses}`)
             .then(res => {
                 //console.log(res.data)

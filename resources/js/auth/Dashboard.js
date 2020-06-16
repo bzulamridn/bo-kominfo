@@ -71,7 +71,7 @@ export default class Login extends Component {
         })
         axios.get('/api/dashboard')
             .then(res => {
-                console.log(res.data);
+              
                 this.setState({
                     isLoading: false,
                 })
@@ -80,7 +80,7 @@ export default class Login extends Component {
                         agenda: res.data.data,
                         agendaNull: false,
                     })
-                    console.log(res.data.data)
+                 
                 } else {
                     this.setState({
                         agendaNull: true,

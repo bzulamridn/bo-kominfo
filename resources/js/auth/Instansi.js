@@ -74,6 +74,10 @@ export default class Instansi extends Component {
                     toast.error("Akun Instansi Sukses Diblokir", {
                         position: toast.POSITION.TOP_RIGHT
                     });
+                }else if(val === 3){
+                    toast.error("Akun Instansi Sukses Dihapus", {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
                 }else{
                     toast.success("Akun Diaktifkan", {
                         position: toast.POSITION.TOP_RIGHT
@@ -117,13 +121,13 @@ export default class Instansi extends Component {
             <div>
                 <div className="row page-titles">
                     <div className="col-md-5 align-self-center">
-                        <h4 className="text-themecolor">Fasilitas</h4>
+                        <h4 className="text-themecolor">Instansi</h4>
                     </div>
                     <div className="col-md-7 align-self-center text-right">
                         <div className="d-flex justify-content-end align-items-center">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li className="breadcrumb-item active">Fasilitas</li>
+                                <li className="breadcrumb-item active">Instansi</li>
                             </ol>
                         </div>
                     </div>
@@ -156,6 +160,7 @@ export default class Instansi extends Component {
                                                             <tr>
                                                                 <th>No</th>
                                                                 <th>Nama Instansi</th>
+                                                                <th>Username</th>
                                                                 <th>HP / Email</th>
                                                                 <th>Tanggal Daftar</th>
                                                                 <th>Status</th>
@@ -167,6 +172,7 @@ export default class Instansi extends Component {
                                                                 <tr key={key}>
                                                                     <td>{key + 1}</td>
                                                                     <td>{data.nama}</td>
+                                                                    <td>{data.username}</td>
                                                                     <td>{data.no_hp} / {data.email}</td>
                                                                     <td>{moment(data.created_at).format('DD MMMM YYYY')}</td>
                                                                     <td>{data.aktif === "0" ? <span class="badge badge-warning">Belum Aktifasi Email</span> : data.aktif === "1" ? <span class="badge badge-info">Aktif</span> : <span class="badge badge-danger">Blokir</span>}</td>
@@ -189,11 +195,14 @@ export default class Instansi extends Component {
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                     <div className="row">
-                                                        <div className="col-lg-6">
+                                                        <div className="col-lg-4">
                                                             <button className="btn btn-info btn-block" onClick={() => this.aktifOrBlok(1)}>Aktifkan</button>
                                                         </div>
-                                                        <div className="col-lg-6">
-                                                            <button className="btn btn-danger btn-block" onClick={() => this.aktifOrBlok(2)}>Blokir</button>
+                                                        <div className="col-lg-4">
+                                                            <button className="btn btn-warning btn-block" onClick={() => this.aktifOrBlok(2)}>Blokir</button>
+                                                        </div>
+                                                        <div className="col-lg-4">
+                                                            <button className="btn btn-danger btn-block" onClick={() => this.aktifOrBlok(3)}>Hapus</button>
                                                         </div>
                                                     </div>
                                                 </Modal.Body>

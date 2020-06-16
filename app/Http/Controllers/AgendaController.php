@@ -265,10 +265,13 @@ class AgendaController extends Controller{
         $status = $req->val;
 
         // 1 aktif, 2 blokir
-
-        InstansiModel::where('id', $id)->update([
-            'aktif' => $status
-        ]);
+        if($status != 3){
+            InstansiModel::where('id', $id)->update([
+                'aktif' => $status
+            ]);
+        }else{
+            InstansiModel::where('id', $id)->delete();
+        }
 
         return response()->json(['status' => '1']);
     }

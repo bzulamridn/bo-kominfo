@@ -197,6 +197,7 @@ export default class Login extends Component {
                                                                     <th>Instansi</th>
                                                                     <th>Nama Kegiatan</th>
                                                                     <th>Tanggal</th>
+                                                                    <th>Jam</th>
                                                                     <th>#</th>
                                                                     <th>Status</th>
                                                                     <th>Catatan</th>
@@ -209,6 +210,7 @@ export default class Login extends Component {
                                                                         <td>{data.nama}</td>
                                                                         <td>{data.nama_kegiatan}</td>
                                                                         <td>{moment(data.tanggal_mulai).format('DD MMMM YYYY')} - {moment(data.tanggal_selesai).format('DD MMMM YYYY')}</td>
+                                                                        <td>{data.jam_mulai} sampai {data.jam_selesai}</td>
                                                                         <td><a href={"/Surat_Pengantar/" + data.pdf_file} target="_blank" className="btn btn-secondary"><i className="ti-book"></i>  Surat Pengantar</a> <button className="btn btn-info" onClick={() => this.detailAgenda(data.id)}><i className="ti-check-box"></i> Detail Kegiatan & Konfirmasi</button></td>
                                                                         <td>{data.status === "0" ? <span class="badge badge-warning">Menunggu Konfirmasi</span> : data.status === "1" ? <span class="badge badge-info">Terjadwal</span> : <span class="badge badge-danger">Tidak disetujui</span>}</td>
                                                                         <td>{data.catatan_konfirmasi}</td>

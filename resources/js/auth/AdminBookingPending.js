@@ -115,7 +115,7 @@ export default class Login extends Component {
                     toast.error("Kegiatan Berhasil Ditolak", {
                         position: toast.POSITION.TOP_RIGHT
                     });
-                    window.open(`https://api.whatsapp.com/send?phone=+62085705477252&text=Halo ${res.data.data.nama} Permintaan anda tentang peminjaman ruangan TCM Room untuk kegiatan ${res.data.data.nama_kegiatan} tidak disetujui. Cek email anda untuk keterangan lebih lanjut. Terima Kasih `)
+                    window.open(`https://api.whatsapp.com/send?phone=+62${res.data.data.no_hp}&text=Halo ${res.data.data.nama} Permintaan anda tentang peminjaman ruangan TCM Room untuk kegiatan ${res.data.data.nama_kegiatan} tidak disetujui. Cek email anda untuk keterangan lebih lanjut. Terima Kasih `)
                 })
         }
     }
@@ -219,6 +219,7 @@ export default class Login extends Component {
                                                                     <th>Instansi</th>
                                                                     <th>Nama Kegiatan</th>
                                                                     <th>Tanggal</th>
+                                                                    <th>Jam </th>
                                                                     <th>#</th>
                                                                 </tr>
                                                             </thead>
@@ -228,7 +229,8 @@ export default class Login extends Component {
                                                                         <td>{key + 1}</td>
                                                                         <td>{data.nama}</td>
                                                                         <td>{data.nama_kegiatan}</td>
-                                                                        <td>{moment(data.tanggal_mulai).format('DD MMMM YYYY')} - {moment(data.tanggal_selesai).format('DD MMMM YYYY')}</td>
+                                                                        <td>{moment(data.tanggal_mulai).format('DD MMMM YYYY')} - {moment(data.tanggal_selesai).format('DD MMMM YYYY')} </td>
+                                                                        <td>{data.jam_mulai} sampai {data.jam_selesai}</td>
                                                                         <td><a href={"/Surat_Pengantar/" + data.pdf_file} target="_blank" className="btn btn-secondary"><i className="ti-book"></i>  Surat Pengantar</a> <button className="btn btn-info" onClick={() => this.detailAgenda(data.id)}><i className="ti-check-box"></i> Detail Kegiatan & Konfirmasi</button></td>
                                                                     </tr>
                                                                 )}

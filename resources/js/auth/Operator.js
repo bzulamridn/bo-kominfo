@@ -165,13 +165,13 @@ export default class Login extends Component {
             <div>
                 <div className="row page-titles">
                     <div className="col-md-5 align-self-center">
-                        <h4 className="text-themecolor">Agenda</h4>
+                        <h4 className="text-themecolor">Operator</h4>
                     </div>
                     <div className="col-md-7 align-self-center text-right">
                         <div className="d-flex justify-content-end align-items-center">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                                <li className="breadcrumb-item active">Agenda</li>
+                                <li className="breadcrumb-item active">Operator</li>
                             </ol>
                         </div>
                     </div>
@@ -192,7 +192,7 @@ export default class Login extends Component {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex m-b-40 align-items-center no-block">
-                                        <h5 className="card-title ">AGENDA ANDA</h5>
+                                        <h5 className="card-title ">Operator TCM Room</h5>
                                         <div className="ml-auto">
                                             <ul className="list-inline font-12">
                                                 <button type="button" className="btn btn-info d-none d-lg-block m-l-15" onClick={() => this.show(1)}><i className="fa fa-plus-circle"></i> Tambah Operator</button>

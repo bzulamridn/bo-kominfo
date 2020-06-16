@@ -11,12 +11,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import { BounceLoader, PacmanLoader } from "react-spinners";
 import { Router, Link, browserHistory } from 'react-router';
 import axios from 'axios';
-// Include special components if required.
-// import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
-// import FroalaEditorA from 'react-froala-wysiwyg/FroalaEditorA';
-import FroalaEditorButton from 'react-froala-wysiwyg/FroalaEditorButton';
-// import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
-// import FroalaEditorInput from 'react-froala-wysiwyg/FroalaEditorInput';
+
+
+
 const override = css`
 display: block;
 margin: 0 auto;
@@ -26,28 +23,43 @@ border-color: red;
 export default class MyEditor extends React.Component {
     constructor() {
         super();
-
         this.handleModelChange = this.handleModelChange.bind(this);
-
         this.state = {
             isLoading: true,
-            model: 'Example text'
+            model: 'Example text',
         };
     }
 
     componentDidMount() {
-       this.syarat()
+        this.syarat()
     }
 
-    syarat(){
+    syarat() {
         axios.get('/api/syarat')
-        .then(res => {
-            this.setState({
-                isLoading: false,
-                model: res.data.data.syarat
+            .then(res => {
+                this.setState({
+                    isLoading: false,
+                    model: res.data.data.syarat,
+                  
+                })
+                console.log(res.data.data.syarat)
             })
-            console.log(res.data.data)
+    }
+
+    simpan() {
+        this.setState({
+            isLoading: true
         })
+        console.log(this.state.model)
+        axios.post('/api/simpansyarat/', {
+            syarat: this.state.model
+        })
+            .then(res => {
+                toast.success("Syarat dan Ketentuan berhasil Disimpan", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            })
+        this.syarat()
     }
 
     handleModelChange(model) {
@@ -56,34 +68,15 @@ export default class MyEditor extends React.Component {
         });
     }
 
-    simpan () {
-        this.setState({
-            isLoading:true
-        })
-        console.log(this.state.model)
-        axios.post('/api/simpansyarat/',{
-            syarat : this.state.model
-        })
-        .then(res => {
-            toast.success("Syarat dan Ketentuan berhasil Disimpan", {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        })
-        this.syarat()
-    }
 
     config = {
         iframe: true,
         pluginsEnabled: ['align', 'charCounter', 'codeBeautifier', 'codeView', 'colors', 'draggable', 'embedly', 'emoticons', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'image', 'imageManager', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'video', 'wordPaste'],
         toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
-       // toolbarButtonsMD: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
-        // toolbarButtonsSM: ['bold', 'italic', 'underline', 'strikeThrough', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', 'check', '|', 'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
-        // toolbarButtonsXS: ['bold', 'italic', 'underline', '|', 'fontFamily', 'fontSize', 'color', '|', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'check', '|', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'insertHR', 'selectAll', 'clearFormatting', '|', 'spellChecker', '|', 'undo', 'redo'],
-      };
+    };
 
-    //onChange = editorState => this.setState({ editorState });
     render() {
-        const { isLoading } = this.state
+        const { isLoading} = this.state
         return (
             <div>
                 <div className="row page-titles">
@@ -118,10 +111,11 @@ export default class MyEditor extends React.Component {
                                         <FroalaEditor
                                             model={this.state.model}
                                             onModelChange={this.handleModelChange}
-                                            config ={this.config}
+                                            config={this.config}
                                         />
+                                     
                                     </div>
-                                    <div className="row" style={{ marginTop:30 }}>
+                                    <div className="row" style={{ marginTop: 30 }}>
                                         <div className="col-lg-6">
                                             <button className="btn btn-danger btn-block">Reset</button>
                                         </div>
